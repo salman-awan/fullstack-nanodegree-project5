@@ -134,3 +134,7 @@ Following is a complete list of configuration changes that were performed on the
         client_secrets = os.path.join(os.path.dirname(__file__), 'client_secrets.json')
 28. Updated OAuth redirect URIs for Catalog app to add the following URL:
         http://ec2-52-36-31-156.us-west-2.compute.amazonaws.com/oauth2callback
+29. Change SSH port to 2200 by adding the following line to '/etc/ssh/sshd_config':
+        Port 2200
+30. Reload SSH service config:
+        sudo service ssh reload
