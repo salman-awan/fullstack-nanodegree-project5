@@ -40,8 +40,8 @@ Configuration changes
 ---------------------
 Following is a complete list of configuration changes that were performed on the VM in order to secure it and make it host the Catalog app properly:
 
-1. Created a new user named 'grader' with password '123' using the 'adduser' command.
-2. Granted sudo permission to user 'grader' without password prompt by adding the following line to '/etc/sudoers':
+1. Created a new user named 'grader' using the 'adduser' command.
+2. Granted sudo permission to user 'grader' without requiring password prompt by adding the following line to '/etc/sudoers':
         grader    ALL=NOPASSWD: ALL
 3. Allowed SSH access to user 'grader' with the 'udacity_key.rsa' key file by copying '/root/.ssh/authorized_keys' file to the directory '/home/grader/.ssh/'. Now we can SSH as 'grader' using the following command:
         ssh -i ~/.ssh/udacity_key.rsa grader@52.36.31.156
@@ -90,8 +90,8 @@ Following is a complete list of configuration changes that were performed on the
         sudo pip install -r /var/www/CatalogApp/CatalogApp/requirements.txt
         sudo apt-get install python-psycopg2
 21. Ran 'populate_db.py' from directory '/var/www/CatalogApp/CatalogApp' to populate data in the catalog database.
-22. Rename 'application.py' to '__init__.py' in '/var/www/CatalogApp/CatalogApp' directory.
-23. Create file '/etc/apache2/sites-available/CatalogApp.conf':
+22. Renameed 'application.py' to '__init__.py' in '/var/www/CatalogApp/CatalogApp' directory.
+23. Created file '/etc/apache2/sites-available/CatalogApp.conf':
 
         <VirtualHost *:80>
                 #ServerName
@@ -111,7 +111,7 @@ Following is a complete list of configuration changes that were performed on the
                 CustomLog ${APACHE_LOG_DIR}/access.log combined
         </VirtualHost>
 
-24. Create file '/var/www/CatalogApp/catalogapp.wsgi':
+24. Created file '/var/www/CatalogApp/catalogapp.wsgi':
 
         #!/usr/bin/python
         import sys
@@ -125,12 +125,12 @@ Following is a complete list of configuration changes that were performed on the
         application.secret_key = 'super_secret_key'
         application.jinja_env.globals['csrf_token'] = generate_csrf_token
 
-25. Enable Catalog app site:
+25. Enabled Catalog app site:
         sudo a2dissite 000-default
         sudo a2ensite CatalogApp
-26. Restart apache service: 
+26. Restarted apache service: 
         sudo service apache2 restart
-27. Change path for 'client_secrets.json':
+27. Changed path for 'client_secrets.json':
         client_secrets = os.path.join(os.path.dirname(__file__), 'client_secrets.json')
 28. Updated OAuth redirect URIs for Catalog app to add the following URL:
         http://ec2-52-36-31-156.us-west-2.compute.amazonaws.com/oauth2callback
